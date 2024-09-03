@@ -1,10 +1,15 @@
 import { Settings } from "./settings.js";
+import { Tablero } from "./componentes/tablero.js";
+
+let tablero;
 
 document.addEventListener('DOMContentLoaded', function()
 {
-    Settings.canvas.width = Settings.DIM_PANTALLA.ANCHO;
-    Settings.canvas.height = Settings.DIM_PANTALLA.ALTO;
+    const {canvas, ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES} = Settings;
 
-    Settings.canvas.style.scale = (Settings.ESCALA.X, Settings.ESCALA.Y);
-    
+    canvas.width = DIM_PANTALLA.ANCHO;
+    canvas.height = DIM_PANTALLA.ALTO;
+
+    tablero = new Tablero(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES);
+    tablero.dibuja();
 });

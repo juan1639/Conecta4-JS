@@ -14,8 +14,8 @@ export class Settings
 
     static ESCALA =
     {
-        X: 1,
-        Y: 1,
+        X: 2,
+        Y: 2,
     };
 
     static DIM_PANTALLA =
@@ -23,5 +23,11 @@ export class Settings
         ANCHO: Settings.FICHA.ANCHO * Settings.COLUMNAS,
         ALTO: Settings.FICHA.ALTO * Settings.FILAS,
     };
-    
+
+    static COLORES =
+    {
+        AZUL_TABLERO_1: '#0162c8',
+        AZUL_TABLERO_2: '#55e7fc',
+        HUECO_VACIO_FICHA: '#393939',
+    };
 }
