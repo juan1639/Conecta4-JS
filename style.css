@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100vw;
+    height: fit-content;
+    min-height: 100vh;
+    background-color: #871;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#main {
+    width: fit-content;
+    height: fit-content;
+    background-color: #980;
+}
+
+#canvas {
+    border: 2px solid #111;
+    /* width: 800px; */
+    /* height: 600px; */
+    background-color: #555;
+}
