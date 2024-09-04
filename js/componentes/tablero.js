@@ -1,3 +1,4 @@
+import { Settings } from "../settings.js";
 
 export class Tablero
 {
@@ -58,27 +59,29 @@ export class Tablero
 
     static dibujaFichasTiradas()
     {
-        for (let fila = 0; fila < this.filas; fila ++)
+        const {ctx, FICHA, FILAS, COLUMNAS, COLORES} = Settings;
+
+        for (let fila = 0; fila < FILAS; fila ++)
         {
-            for (let columna = 0; columna < this.columnas; columna ++)
+            for (let columna = 0; columna < COLUMNAS; columna ++)
             {
-                if (Tablero.arrayTablero[fila][columna] === 0)
+                if (Tablero.arrayTablero[fila][columna] !== 0)
                 {
-                    this.ctx.beginPath();
-                    this.ctx.fillStyle = this.colores.ROJO_FICHA_1;
+                    ctx.beginPath();
+                    ctx.fillStyle = COLORES.ROJO_FICHA_1;
             
-                    const centroX = Math.floor(this.fichaAncho / 2);
-                    const centroY = Math.floor(this.fichaAlto / 2);
+                    const centroX = Math.floor(FICHA.ANCHO / 2);
+                    const centroY = Math.floor(FICHA.ALTO / 2);
             
-                    this.ctx.arc(
-                        columna * this.fichaAncho + centroX,
-                        fila * this.fichaAlto + centroY,
-                        Math.floor(centroY / this.paddingFicha),
+                    ctx.arc(
+                        columna * FICHA.ANCHO + centroX,
+                        fila * FICHA.ALTO + centroY,
+                        Math.floor(centroY / FICHA.PADDING),
                         0, 2 * Math.PI
                     );
             
-                    this.ctx.fill();
-                    this.ctx.closePath();
+                    ctx.fill();
+                    ctx.closePath();
                 }
             }
         }
