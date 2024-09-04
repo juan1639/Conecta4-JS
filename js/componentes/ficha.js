@@ -1,7 +1,7 @@
 
 export class Ficha
 {
-    constructor(canvas, ctx, FICHA, FILAS, COLUMNAS, COLORES, x, y)
+    constructor(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, x, y)
     {
         this.canvas = canvas;
         this.ctx = ctx;
@@ -13,6 +13,7 @@ export class Ficha
         this.filas = FILAS;
         this.columnas = COLUMNAS;
 
+        this.zonaInfo = zonaInfo;
         this.colores = COLORES;
 
         this.x = x;
@@ -20,6 +21,9 @@ export class Ficha
 
         this.estadosFicha = ['pre-tirada', 'cayendo', 'tirada']; 
         this.estado = this.estadosFicha[0];
+
+        this.opacity = 0.9;
+        this.incOpacity = 0.005;
     }
 
     dibuja()
@@ -31,6 +35,7 @@ export class Ficha
         else if (this.estado === this.estadosFicha[1])
         {
             console.log('cayendo');
+            this.dibujaCayendo();
         }
         else if (this.estado === this.estadosFicha[2])
         {
@@ -41,8 +46,23 @@ export class Ficha
     dibujaPre()
     {
         this.actualizaPre();
+    }
 
-        this.ctx.beginPath();
+    actualizaPre()
+    {
+        this.opacity += this.incOpacity;
+
+        if ((this.opacity >= 1 && this.incOpacity > 0) || (this.opacity <= 0.05 && this.incOpacity < 0))
+        {
+            this.incOpacity = -this.incOpacity;
+        }
+
+        this.zonaInfo.style.opacity = this.opacity.toString();
+    }
+
+    dibujaCayendo()
+    {
+        /* this.ctx.beginPath();
         this.ctx.fillStyle = this.colores.ROJO_FICHA_1;
 
         const centroX = Math.floor(this.fichaAncho / 2);
@@ -56,10 +76,10 @@ export class Ficha
         );
 
         this.ctx.fill();
-        this.ctx.closePath();
+        this.ctx.closePath(); */
     }
 
-    actualizaPre()
+    actualizaCayendo()
     {
 
     }

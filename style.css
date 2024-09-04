@@ -9,6 +9,7 @@ html, body {
     height: fit-content;
     min-height: 100vh;
     background-color: #871;
+    background-image: url('img/fondo-mosaico1.jpg');
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -25,6 +26,7 @@ html, body {
     font-size: 24px;
     font-weight: bold;
     color: #39f011;
+    text-shadow: 1px 1px 2px #111;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +47,7 @@ button {
 
 #canvas {
     border: 1px solid #111;
+    border-radius: 0 0 6px 6px;
     /* width: 800px; */
     /* height: 600px; */
     background-color: #555;

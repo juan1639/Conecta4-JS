@@ -2,7 +2,8 @@ export class Settings
 {
     static canvas = document.getElementById('canvas');
     static ctx = Settings.canvas.getContext('2d');
-
+    
+    static body = document.getElementById('body');
     static zonaInfo = document.getElementById('zona-info');
     static zonaTirarFicha = document.getElementById('zona-tirar-ficha');
 

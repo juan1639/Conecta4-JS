@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function()
     const {
         canvas,
         ctx,
+        body,
         zonaInfo,
         zonaTirarFicha,
         FICHA,
@@ -24,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function()
         DIM_PANTALLA,
         COLORES
     } = Settings;
+
+    // body.style.backgroundImage = "url('img/fondo-mosaico1.jpg')";
 
     canvas.width = DIM_PANTALLA.ANCHO;
     canvas.height = DIM_PANTALLA.ALTO;
@@ -42,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function()
     }
 
     tablero = new Tablero(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES);
-    ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, COLORES, 200, 200);
+    ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, 200, 200);
 
     buclePrincipal();
 });
