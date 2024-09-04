@@ -10,7 +10,7 @@ export class Tablero
         [0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0],
     ];
-    
+
     constructor(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES, imagenes)
     {
         this.ctx = ctx;
@@ -51,6 +51,34 @@ export class Tablero
                         this.fichaAncho,
                         this.fichaAlto
                     );
+                }
+            }
+        }
+    }
+
+    static dibujaFichasTiradas()
+    {
+        for (let fila = 0; fila < this.filas; fila ++)
+        {
+            for (let columna = 0; columna < this.columnas; columna ++)
+            {
+                if (Tablero.arrayTablero[fila][columna] === 0)
+                {
+                    this.ctx.beginPath();
+                    this.ctx.fillStyle = this.colores.ROJO_FICHA_1;
+            
+                    const centroX = Math.floor(this.fichaAncho / 2);
+                    const centroY = Math.floor(this.fichaAlto / 2);
+            
+                    this.ctx.arc(
+                        columna * this.fichaAncho + centroX,
+                        fila * this.fichaAlto + centroY,
+                        Math.floor(centroY / this.paddingFicha),
+                        0, 2 * Math.PI
+                    );
+            
+                    this.ctx.fill();
+                    this.ctx.closePath();
                 }
             }
         }

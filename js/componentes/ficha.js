@@ -1,3 +1,4 @@
+import { Settings } from '../settings.js';
 import { Tablero } from './tablero.js';
 
 export class Ficha
@@ -94,6 +95,8 @@ export class Ficha
         if (this.y >= limiteBajo)
         {
             this.estado = this.estadosFicha[2];
+            Settings.instanciaNuevaFicha = true;
+            
             Tablero.arrayTablero[5][this.columnaSeleccionada] = 1;
             console.log(Tablero.arrayTablero);
             return;

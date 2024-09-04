@@ -29,6 +29,8 @@ export class Settings
         ALTO: Settings.FICHA.ALTO * Settings.FILAS,
     };
 
+    static instanciaNuevaFicha = false;
+
     static COLORES =
     {
         AZUL_TABLERO_1: '#0162c8',

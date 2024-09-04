@@ -60,9 +60,18 @@ function buclePrincipal()
     requestAnimationFrame(buclePrincipal);
     //console.log('bucle...');
 
-    Settings.ctx.clearRect(0, 0, Settings.DIM_PANTALLA.ANCHO, Settings.DIM_PANTALLA.ALTO);
+    const {canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS} = Settings;
+
+    ctx.clearRect(0, 0, Settings.DIM_PANTALLA.ANCHO, Settings.DIM_PANTALLA.ALTO);
+
+    if (Settings.instanciaNuevaFicha)
+    {
+        Settings.instanciaNuevaFicha = false;
+        ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS);
+    }
 
     ficha.dibuja();
+    Tablero.dibujaFichasTiradas();
     tablero.dibuja();
 }
 
