@@ -7,7 +7,7 @@ export class Tablero
 
         this.fichaAncho = FICHA.ANCHO;
         this.fichaAlto = FICHA.ALTO;
-        this.paddingFicha = 1.2;
+        this.paddingFicha = FICHA.PADDING;
 
         this.filas = FILAS;
         this.columnas = COLUMNAS;
@@ -19,9 +19,9 @@ export class Tablero
     dibuja()
     {
         let degradado = this.ctx.createLinearGradient(
-            0, this.fichaAlto, this.fichaAncho * this.columnas, this.fichaAlto * this.filas
+            0, 0, this.fichaAncho * this.columnas, this.fichaAlto * this.filas
         );
-        
+
         degradado.addColorStop(0, this.colores.AZUL_TABLERO_2);
         degradado.addColorStop(0.5, this.colores.AZUL_TABLERO_1);
         degradado.addColorStop(1, this.colores.AZUL_TABLERO_2);
@@ -30,16 +30,13 @@ export class Tablero
         this.ctx.fillStyle = degradado;
 
         this.ctx.fillRect(
-            0,
-            this.fichaAlto,
+            0, 0,
             this.fichaAncho * this.columnas,
-            this.fichaAlto * (this.filas - 1)
+            this.fichaAlto * this.filas
         );
 
         for (let y = 0; y < this.filas; y ++)
         {
-            if (y === 0) continue;
-
             for (let x = 0; x < this.columnas; x ++)
             {
                 //  HUECOS FICHA (CIRCULOS)

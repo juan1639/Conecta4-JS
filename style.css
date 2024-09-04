@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 html, body {
@@ -16,11 +17,34 @@ html, body {
 #main {
     width: fit-content;
     height: fit-content;
-    background-color: #980;
+    /* background-color: #980; */
+}
+
+#zona-info {
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #39f011;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #999; */
+}
+
+#zona-tirar-ficha {
+    border: 1px solid #111;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(45deg, #77f053, #1088cc);
+}
+
+button {
+    opacity: 0;
+    color: seagreen;
+    background-color: lightblue;
 }
 
 #canvas {
-    border: 2px solid #111;
+    border: 1px solid #111;
     /* width: 800px; */
     /* height: 600px; */
     background-color: #555;
