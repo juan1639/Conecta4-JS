@@ -23,7 +23,9 @@ document.addEventListener('DOMContentLoaded', function()
         FILAS,
         COLUMNAS,
         DIM_PANTALLA,
-        COLORES
+        COLORES,
+        TEXTOS,
+        imagenes
     } = Settings;
 
     // body.style.backgroundImage = "url('img/fondo-mosaico1.jpg')";
@@ -33,19 +35,19 @@ document.addEventListener('DOMContentLoaded', function()
 
     zonaInfo.style.width = canvas.width.toString() + 'px';
     zonaInfo.style.height = FICHA.ALTO.toString() + 'px';
-    zonaInfo.innerText = 'Haz click debajo para tirar...';
+    zonaInfo.innerText = TEXTOS.TURNO_JUGADOR;
 
     zonaTirarFicha.style.width = canvas.width.toString() + 'px';
     zonaTirarFicha.style.height = FICHA.ALTO.toString() + 'px';
 
     for (let i = 0; i < COLUMNAS; i ++)
     {
-        const id = 'col' + i.toString();
+        const id = 'col-' + i.toString();
         creaElementoDOM(columnasTirarFicha, zonaTirarFicha, 'button', id, FICHA.ANCHO, FICHA.ALTO);
     }
 
-    tablero = new Tablero(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES);
-    ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, 200, 200);
+    tablero = new Tablero(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES, imagenes);
+    ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS);
 
     buclePrincipal();
 });
@@ -58,6 +60,10 @@ function buclePrincipal()
     requestAnimationFrame(buclePrincipal);
     //console.log('bucle...');
 
-    tablero.dibuja();
+    Settings.ctx.clearRect(0, 0, Settings.DIM_PANTALLA.ANCHO, Settings.DIM_PANTALLA.ALTO);
+
     ficha.dibuja();
+    tablero.dibuja();
 }
+
+export { ficha };

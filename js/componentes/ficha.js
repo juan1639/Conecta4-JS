@@ -1,7 +1,8 @@
+import { Tablero } from './tablero.js';
 
 export class Ficha
 {
-    constructor(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, x, y)
+    constructor(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS)
     {
         this.canvas = canvas;
         this.ctx = ctx;
@@ -13,12 +14,17 @@ export class Ficha
         this.filas = FILAS;
         this.columnas = COLUMNAS;
 
+        this.textos = TEXTOS;
         this.zonaInfo = zonaInfo;
+        
         this.colores = COLORES;
-
-        this.x = x;
-        this.y = y;
-
+        
+        this.columnaSeleccionada = 999;// validas (0 al 6)
+        this.x = this.columnaSeleccionada * this.fichaAncho;
+        this.y = 0;
+        
+        this.velY = 2;
+        
         this.estadosFicha = ['pre-tirada', 'cayendo', 'tirada']; 
         this.estado = this.estadosFicha[0];
 
@@ -34,12 +40,11 @@ export class Ficha
         }
         else if (this.estado === this.estadosFicha[1])
         {
-            console.log('cayendo');
             this.dibujaCayendo();
         }
         else if (this.estado === this.estadosFicha[2])
         {
-            console.log('tirada');
+            console.log('tirada (agregada al array)');
         }
     }
 
@@ -62,7 +67,9 @@ export class Ficha
 
     dibujaCayendo()
     {
-        /* this.ctx.beginPath();
+        this.actualizaCayendo();
+
+        this.ctx.beginPath();
         this.ctx.fillStyle = this.colores.ROJO_FICHA_1;
 
         const centroX = Math.floor(this.fichaAncho / 2);
@@ -76,11 +83,46 @@ export class Ficha
         );
 
         this.ctx.fill();
-        this.ctx.closePath(); */
+        this.ctx.closePath();
     }
 
     actualizaCayendo()
     {
+        this.zonaInfo.innerText = this.textos.TURNO_TRANSICION;
+        const limiteBajo = (this.filas - 1) * this.fichaAlto;
 
+        if (this.y >= limiteBajo)
+        {
+            this.estado = this.estadosFicha[2];
+            Tablero.arrayTablero[5][this.columnaSeleccionada] = 1;
+            console.log(Tablero.arrayTablero);
+            return;
+        }
+
+        this.x = this.columnaSeleccionada * this.fichaAncho;
+        this.y += this.velY;
+    }
+
+    // ========================================================================
+    //  G e t t e r s  &  S e t t e r s
+    // ------------------------------------------------------------------------
+    getColumnaSeleccionada()
+    {
+        return this.columnaSeleccionada;
+    }
+
+    setColumnaSeleccionada(columna)
+    {
+        this.columnaSeleccionada = columna;
+    }
+
+    getEstado()
+    {
+        return this.estado;
+    }
+
+    setEstado(nuevoEstado)
+    {
+        this.estado = nuevoEstado;
     }
 }

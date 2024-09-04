@@ -1,7 +1,17 @@
 
 export class Tablero
 {
-    constructor(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES)
+    static arrayTablero =
+    [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0],
+    ];
+    
+    constructor(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES, imagenes)
     {
         this.ctx = ctx;
 
@@ -14,47 +24,34 @@ export class Tablero
         this.pantalla = DIM_PANTALLA;
 
         this.colores = COLORES;
+
+        this.imgCargada = false;
+        this.img = new Image();
+        this.img.src = imagenes.tileTablero;
+
+        this.img.onload = () =>
+        {
+            this.imgCargada = true;
+            console.log('img-tablero cargada');
+        }
     }
 
     dibuja()
     {
-        let degradado = this.ctx.createLinearGradient(
-            0, 0, this.fichaAncho * this.columnas, this.fichaAlto * this.filas
-        );
-
-        degradado.addColorStop(0, this.colores.AZUL_TABLERO_2);
-        degradado.addColorStop(0.5, this.colores.AZUL_TABLERO_1);
-        degradado.addColorStop(1, this.colores.AZUL_TABLERO_2);
-        
-        //this.ctx.fillStyle = this.colores.AZUL_TABLERO_1;
-        this.ctx.fillStyle = degradado;
-
-        this.ctx.fillRect(
-            0, 0,
-            this.fichaAncho * this.columnas,
-            this.fichaAlto * this.filas
-        );
-
         for (let y = 0; y < this.filas; y ++)
         {
             for (let x = 0; x < this.columnas; x ++)
             {
-                //  HUECOS FICHA (CIRCULOS)
-                this.ctx.beginPath();
-                this.ctx.fillStyle = this.colores.HUECO_VACIO_FICHA;
-
-                const centroX = Math.floor(this.fichaAncho / 2);
-                const centroY = Math.floor(this.fichaAlto / 2);
-
-                this.ctx.arc(
-                    x * this.fichaAncho + centroX,
-                    y * this.fichaAlto + centroY,
-                    Math.floor(centroY / this.paddingFicha),
-                    0, Math.PI * 2
-                );
-
-                this.ctx.fill();
-                this.ctx.closePath();
+                if (this.imgCargada)
+                {
+                    this.ctx.drawImage(
+                        this.img,
+                        x * this.fichaAncho,
+                        y * this.fichaAlto,
+                        this.fichaAncho,
+                        this.fichaAlto
+                    );
+                }
             }
         }
     }

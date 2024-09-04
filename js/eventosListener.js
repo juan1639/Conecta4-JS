@@ -1,3 +1,4 @@
+import { ficha } from './main.js';
 
 export const click = document.addEventListener('click', (e) => {
 
@@ -7,5 +8,11 @@ export const click = document.addEventListener('click', (e) => {
     if (e.target.parentElement.id === 'zona-tirar-ficha')
     {
         console.log(e.target.id);
+
+        const arraySplit = e.target.id.split('-');
+        const columnaSel = parseInt(arraySplit[1]);
+
+        ficha.setEstado(ficha.estadosFicha[1]);
+        ficha.setColumnaSeleccionada(columnaSel);
     }
 });

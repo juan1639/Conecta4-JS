@@ -34,9 +34,22 @@ export class Settings
         AZUL_TABLERO_1: '#0162c8',
         AZUL_TABLERO_2: '#55e7fc',
         HUECO_VACIO_FICHA: '#393939',
+        TRANSPARENTE: 'transparent',
         ROJO_FICHA_1: '#ff2209',
         ROJO_FICHA_2: '#cc1100',
-        ZONA_TIRA_FICHA_1: '#33f023',
+        ZONA_TIRA_FICHA_1: '#032f57',
         ZONA_TIRA_FICHA_2: '#10cccc',
+    };
+
+    static TEXTOS =
+    {
+        TURNO_JUGADOR: 'Haz click debajo para tirar...',
+        TURNO_CPU: 'CPU Pensando...',
+        TURNO_TRANSICION: '',
+    };
+
+    static imagenes =
+    {
+        tileTablero: "./img/tablero-4enRaya.png",
     };
 }

@@ -10,6 +10,9 @@ html, body {
     min-height: 100vh;
     background-color: #871;
     background-image: url('img/fondo-mosaico1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -36,7 +39,7 @@ html, body {
 #zona-tirar-ficha {
     border: 1px solid #111;
     border-radius: 6px 6px 0 0;
-    background: linear-gradient(45deg, #77f053, #1088cc);
+    background: linear-gradient(45deg, #1088cc, #032f57);
 }
 
 button {
