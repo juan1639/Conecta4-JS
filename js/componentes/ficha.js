@@ -1,12 +1,15 @@
+import { siTurnoCPUtirar } from '../funciones/funciones.js';
 import { Settings } from '../settings.js';
 import { Tablero } from './tablero.js';
 
 export class Ficha
 {
-    constructor(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS)
+    constructor(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS, turno)
     {
         this.canvas = canvas;
         this.ctx = ctx;
+
+        this.turno = turno;
 
         this.fichaAncho = FICHA.ANCHO;
         this.fichaAlto = FICHA.ALTO;
@@ -24,7 +27,7 @@ export class Ficha
         this.x = this.columnaSeleccionada * this.fichaAncho;
         this.y = 0;
         
-        this.velY = 2;
+        this.velY = 4;
         
         this.estadosFicha = ['pre-tirada', 'cayendo', 'tirada']; 
         this.estado = this.estadosFicha[0];
@@ -42,10 +45,6 @@ export class Ficha
         else if (this.estado === this.estadosFicha[1])
         {
             this.dibujaCayendo();
-        }
-        else if (this.estado === this.estadosFicha[2])
-        {
-            console.log('tirada (agregada al array)');
         }
     }
 
@@ -71,7 +70,7 @@ export class Ficha
         this.actualizaCayendo();
 
         this.ctx.beginPath();
-        this.ctx.fillStyle = this.colores.ROJO_FICHA_1;
+        this.ctx.fillStyle = this.turno ? this.colores.ROJO_FICHA_1 : this.colores.VERDE_FICHA_1;
 
         const centroX = Math.floor(this.fichaAncho / 2);
         const centroY = Math.floor(this.fichaAlto / 2);
@@ -90,20 +89,51 @@ export class Ficha
     actualizaCayendo()
     {
         this.zonaInfo.innerText = this.textos.TURNO_TRANSICION;
+
+        //  CHECK SI COLUMNA LLENA (Return inmediato):
+        const checkY = Math.floor(this.y / this.fichaAlto);
+
+        if (Tablero.arrayTablero[checkY][this.columnaSeleccionada] !== 0)
+        {
+            console.log('columna llena! prueba otra...');
+            this.estado = this.estadosFicha[2];
+
+            if (!this.turno)
+            {
+                siTurnoCPUtirar(900);
+            }
+            
+            return;
+        }
+
+        //  CHECK LIMITE BAJO DEL TABLERO:
         const limiteBajo = (this.filas - 1) * this.fichaAlto;
 
         if (this.y >= limiteBajo)
         {
-            this.estado = this.estadosFicha[2];
-            Settings.instanciaNuevaFicha = true;
-            
-            Tablero.arrayTablero[5][this.columnaSeleccionada] = 1;
-            console.log(Tablero.arrayTablero);
+            this.habilitarSiguienteFicha(this.filas - 1);
             return;
         }
 
+        //  CHECK SI HAY FICHA DEBAJO:
+        if (Tablero.arrayTablero[checkY + 1][this.columnaSeleccionada] !== 0)
+        {
+            this.habilitarSiguienteFicha(checkY);
+            return;
+        }
+
+        //  ACTUALIZA FICHA (Sigue bajando)...
         this.x = this.columnaSeleccionada * this.fichaAncho;
         this.y += this.velY;
+    }
+
+    habilitarSiguienteFicha(fila)
+    {
+        this.estado = this.estadosFicha[2];
+        Settings.instanciaNuevaFicha = true;
+        
+        Tablero.arrayTablero[fila][this.columnaSeleccionada] = this.turno ? 1 : 2;
+        console.log(Tablero.arrayTablero);
     }
 
     // ========================================================================

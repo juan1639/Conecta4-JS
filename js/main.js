@@ -2,11 +2,13 @@ import { Settings } from "./settings.js";
 import { click } from "./eventosListener.js";
 import { Tablero } from "./componentes/tablero.js";
 import { Ficha } from "./componentes/ficha.js";
-import { creaElementoDOM } from "./funciones/funciones.js";
+import { creaElementoDOM, setTextoSegunTurno, siTurnoCPUtirar } from "./funciones/funciones.js";
 
 let tablero;
 let ficha;
 let columnasTirarFicha;
+
+let turno = false;// true = turno jugador, false = turno CPU
 
 // ======================================================================
 //  FUNCION INICIALIZADORA
@@ -35,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function()
 
     zonaInfo.style.width = canvas.width.toString() + 'px';
     zonaInfo.style.height = FICHA.ALTO.toString() + 'px';
-    zonaInfo.innerText = TEXTOS.TURNO_JUGADOR;
 
     zonaTirarFicha.style.width = canvas.width.toString() + 'px';
     zonaTirarFicha.style.height = FICHA.ALTO.toString() + 'px';
@@ -47,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function()
     }
 
     tablero = new Tablero(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES, imagenes);
-    ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS);
 
     buclePrincipal();
 });
@@ -67,7 +67,17 @@ function buclePrincipal()
     if (Settings.instanciaNuevaFicha)
     {
         Settings.instanciaNuevaFicha = false;
-        ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS);
+
+        turno = turno ? false : true;
+        zonaInfo.innerText = setTextoSegunTurno(turno);
+        console.log(turno);
+
+        if (!turno)
+        {
+            siTurnoCPUtirar(2900);// 2800ms CPU simula pensar
+        }
+
+        ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS, turno);
     }
 
     ficha.dibuja();

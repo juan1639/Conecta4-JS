@@ -67,8 +67,10 @@ export class Tablero
             {
                 if (Tablero.arrayTablero[fila][columna] !== 0)
                 {
+                    const valor = Tablero.arrayTablero[fila][columna];
+
                     ctx.beginPath();
-                    ctx.fillStyle = COLORES.ROJO_FICHA_1;
+                    ctx.fillStyle = valor === 1 ? COLORES.ROJO_FICHA_1 : COLORES.VERDE_FICHA_1;
             
                     const centroX = Math.floor(FICHA.ANCHO / 2);
                     const centroY = Math.floor(FICHA.ALTO / 2);

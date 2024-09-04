@@ -29,7 +29,7 @@ export class Settings
         ALTO: Settings.FICHA.ALTO * Settings.FILAS,
     };
 
-    static instanciaNuevaFicha = false;
+    static instanciaNuevaFicha = true;
 
     static COLORES =
     {
@@ -39,6 +39,8 @@ export class Settings
         TRANSPARENTE: 'transparent',
         ROJO_FICHA_1: '#ff2209',
         ROJO_FICHA_2: '#cc1100',
+        VERDE_FICHA_1: '#39f009',
+        VERDE_FICHA_2: '#10cc00',
         ZONA_TIRA_FICHA_1: '#032f57',
         ZONA_TIRA_FICHA_2: '#10cccc',
     };
