@@ -133,6 +133,8 @@ export class Ficha
 
     habilitarSiguienteFicha(fila)
     {
+        Settings.AUDIO.dieThrow1.play();
+
         this.estado = this.estadosFicha[2];
         Settings.instanciaNuevaFicha = true;
         
@@ -143,6 +145,9 @@ export class Ficha
 
         if (Settings.gameOver)
         {
+            Settings.AUDIO.musicaFondo.pause();
+            Settings.AUDIO.aplausos.play();
+            
             setTimeout(() =>
             {
                 Settings.menuPreJuego = true;

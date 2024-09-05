@@ -25,7 +25,8 @@ export function siTurnoCPUtirar(pensandoCPU)
 
         ficha.setEstado(ficha.estadosFicha[1]);
         ficha.setColumnaSeleccionada(columnaSel);
-
+        Settings.AUDIO.chipsCollide1.play();
+        Settings.AUDIO.chipsCollide2.play();
     }, pensandoCPU);
 }
 

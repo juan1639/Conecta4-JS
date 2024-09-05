@@ -16,6 +16,9 @@ export const click = document.addEventListener('click', (e) => {
 
         ficha.setEstado(ficha.estadosFicha[1]);
         ficha.setColumnaSeleccionada(columnaSel);
+
+        Settings.AUDIO.chipsCollide1.play();
+        Settings.AUDIO.chipsCollide3.play();
     }
 
     if (e.target.id === 'botonNewGame' && Settings.menuPreJuego)
@@ -28,6 +31,7 @@ export const click = document.addEventListener('click', (e) => {
         {
             Settings.AUDIO.musicaFondo.play();
             Settings.AUDIO.musicaFondo.loop = true;
+            Settings.AUDIO.musicaFondo.volume = 0.7;
         }
     }
 });

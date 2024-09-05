@@ -75,5 +75,6 @@ export class Settings
         dieThrow2: new Audio("./audio/dieThrow2.ogg"),
         gameOver: new Audio("./audio/gameover.mp3"),
         pacmanDies: new Audio("./audio/pacmandies.ogg"),
+        aplausos: new Audio("./audio/aplausoseagle.mp3"),
     }
 }
