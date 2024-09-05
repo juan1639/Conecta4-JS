@@ -43,13 +43,18 @@ export class Settings
         VERDE_FICHA_2: '#10cc00',
         ZONA_TIRA_FICHA_1: '#032f57',
         ZONA_TIRA_FICHA_2: '#10cccc',
+        TEXTO_TURNO_JUGADOR: '#ee7711',
+        TEXTO_TURNO_CPU: '#33ee10',
     };
 
     static TEXTOS =
     {
-        TURNO_JUGADOR: 'Haz click debajo para tirar...',
+        TURNO_JUGADOR: 'Click aquí debajo para tirar...',
         TURNO_CPU: 'CPU Pensando...',
         TURNO_TRANSICION: '',
+        GANA_JUGADOR: 'Ganaste!',
+        GANA_CPU: 'Perdiste',
+        EMPATE: 'Empate!',
     };
 
     static imagenes =

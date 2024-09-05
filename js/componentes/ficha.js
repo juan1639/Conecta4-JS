@@ -1,6 +1,6 @@
-import { siTurnoCPUtirar } from '../funciones/funciones.js';
 import { Settings } from '../settings.js';
 import { Tablero } from './tablero.js';
+import { siTurnoCPUtirar, checkPosibleGanador } from '../funciones/funciones.js';
 
 export class Ficha
 {
@@ -57,12 +57,14 @@ export class Ficha
     {
         this.opacity += this.incOpacity;
 
-        if ((this.opacity >= 1 && this.incOpacity > 0) || (this.opacity <= 0.05 && this.incOpacity < 0))
+        if ((this.opacity >= 1 && this.incOpacity > 0) || (this.opacity <= 0.4 && this.incOpacity < 0))
         {
             this.incOpacity = -this.incOpacity;
         }
 
         this.zonaInfo.style.opacity = this.opacity.toString();
+
+        this.zonaInfo.style.color = this.turno ? Settings.COLORES.TEXTO_TURNO_JUGADOR : Settings.COLORES.TEXTO_TURNO_CPU;
     }
 
     dibujaCayendo()
@@ -132,7 +134,10 @@ export class Ficha
         this.estado = this.estadosFicha[2];
         Settings.instanciaNuevaFicha = true;
         
+        // 1 = fichaRoja(Jugador) / 2 = fichaVerde(CPU)
         Tablero.arrayTablero[fila][this.columnaSeleccionada] = this.turno ? 1 : 2;
+
+        if (checkPosibleGanador(this.turno)) console.log('gana jugador');
         console.log(Tablero.arrayTablero);
     }
 
