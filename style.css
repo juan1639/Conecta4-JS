@@ -29,7 +29,8 @@ html, body {
     font-size: 30px;
     font-weight: bold;
     color: #39f011;
-    text-shadow: 1px 1px 2px #111;
+    text-shadow: 2px 2px 2px #111;
+    /* text-shadow: 0 0 11px lightyellow; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,6 +60,35 @@ button {
     opacity: 0;
     color: seagreen;
     background-color: lightblue;
+}
+
+#botonNewGame {
+    opacity: 1;
+    border: none;
+    border-radius: 8px;
+    width: 25%;
+    height: 15%;
+    max-width: 400px;
+    max-height: 200px;
+    top: 50%;
+    left: 50%;
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffff99;
+    transform: translate(-50%, -50%);
+    background-color: #ee3300;
+    padding: 0;
+    position: absolute;
+    z-index: 50;
+    /* visibility: visible; */
+    /* transition: all 1s; */
+    animation: none;
+}
+
+#botonNewGame:hover {
+    transform: scale(1.1) translate(-45%, -45%);
+    text-shadow: 0 0 11px lightyellow;
+    background-color: #ff7700;
 }
 
 #canvas {

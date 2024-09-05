@@ -6,6 +6,7 @@ export class Settings
     static body = document.getElementById('body');
     static zonaInfo = document.getElementById('zona-info');
     static zonaTirarFicha = document.getElementById('zona-tirar-ficha');
+    static botonNewGame = document.getElementById('botonNewGame');
 
     static FICHA =
     {
@@ -30,6 +31,8 @@ export class Settings
     };
 
     static instanciaNuevaFicha = true;
+    static menuPreJuego = true;
+    static gameOver = false;
 
     static COLORES =
     {
@@ -61,4 +64,16 @@ export class Settings
     {
         tileTablero: "./img/tablero-4enRaya.png",
     };
+
+    static AUDIO =
+    {
+        musicaFondo: new Audio("./audio/music-puzzle-game1.mp3"),
+        chipsCollide1: new Audio("./audio/chipsCollide1.ogg"),
+        chipsCollide2: new Audio("./audio/chipsCollide2.ogg"),
+        chipsCollide3: new Audio("./audio/chipsCollide3.ogg"),
+        dieThrow1: new Audio("./audio/dieThrow1.ogg"),
+        dieThrow2: new Audio("./audio/dieThrow2.ogg"),
+        gameOver: new Audio("./audio/gameover.mp3"),
+        pacmanDies: new Audio("./audio/pacmandies.ogg"),
+    }
 }

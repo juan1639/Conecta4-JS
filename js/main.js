@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function()
         body,
         zonaInfo,
         zonaTirarFicha,
+        botonNewGame,
         FICHA,
         FILAS,
         COLUMNAS,
@@ -49,22 +50,41 @@ document.addEventListener('DOMContentLoaded', function()
 
     tablero = new Tablero(ctx, FICHA, FILAS, COLUMNAS, DIM_PANTALLA, COLORES, imagenes);
 
+    botonNewGame.style.opacity = '1';
+    Settings.instanciaNuevaFicha = true;
+    Settings.menuPreJuego = true;
+    Settings.gameOver = false;
+
     buclePrincipal();
 });
 
 // ======================================================================
 //  BUCLE PRINCIPAL (Main loop)
+//  
 //  ---------------------------------------------------------------------
 function buclePrincipal()
 {
     requestAnimationFrame(buclePrincipal);
     //console.log('bucle...');
 
+    Settings.ctx.clearRect(0, 0, Settings.DIM_PANTALLA.ANCHO, Settings.DIM_PANTALLA.ALTO);
+
+    checkInstanciarNuevaFicha_gameover();
+
+    if (ficha)
+    {
+        ficha.dibuja();
+    }
+
+    Tablero.dibujaFichasTiradas();
+    tablero.dibuja();
+}
+
+function checkInstanciarNuevaFicha_gameover()
+{
     const {canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS} = Settings;
 
-    ctx.clearRect(0, 0, Settings.DIM_PANTALLA.ANCHO, Settings.DIM_PANTALLA.ALTO);
-
-    if (Settings.instanciaNuevaFicha)
+    if (Settings.instanciaNuevaFicha && !Settings.gameOver && !Settings.menuPreJuego)
     {
         Settings.instanciaNuevaFicha = false;
 
@@ -79,10 +99,11 @@ function buclePrincipal()
 
         ficha = new Ficha(canvas, ctx, FICHA, FILAS, COLUMNAS, zonaInfo, COLORES, TEXTOS, turno);
     }
-
-    ficha.dibuja();
-    Tablero.dibujaFichasTiradas();
-    tablero.dibuja();
+    else if (Settings.instanciaNuevaFicha && Settings.gameOver && !Settings.menuPreJuego)
+    {
+        Settings.instanciaNuevaFicha = false;
+        zonaInfo.innerText = turno ? Settings.TEXTOS.GANA_JUGADOR : Settings.TEXTOS.GANA_CPU;
+    }
 }
 
-export { ficha };
+export { ficha, turno };

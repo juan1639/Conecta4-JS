@@ -88,4 +88,17 @@ export class Tablero
             }
         }
     }
+
+    static resetearArrayTablero()
+    {
+        const {FILAS, COLUMNAS} = Settings;
+
+        for (let fila = 0; fila < FILAS; fila ++)
+        {
+            for (let columna = 0; columna < COLUMNAS; columna ++)
+            {
+                Tablero.arrayTablero[fila][columna] = 0;
+            }
+        }
+    }
 }

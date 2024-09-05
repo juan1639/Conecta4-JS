@@ -38,6 +38,8 @@ export class Ficha
 
     dibuja()
     {
+        if (Settings.gameOver) return;
+
         if (this.estado === this.estadosFicha[0])
         {
             this.dibujaPre();
@@ -137,7 +139,18 @@ export class Ficha
         // 1 = fichaRoja(Jugador) / 2 = fichaVerde(CPU)
         Tablero.arrayTablero[fila][this.columnaSeleccionada] = this.turno ? 1 : 2;
 
-        if (checkPosibleGanador(this.turno)) console.log('gana jugador');
+        Settings.gameOver = checkPosibleGanador(this.turno);
+
+        if (Settings.gameOver)
+        {
+            setTimeout(() =>
+            {
+                Settings.menuPreJuego = true;
+                Settings.botonNewGame.style.opacity = '1';
+                Settings.gameOver = false;
+                Settings.instanciaNuevaFicha = true;
+            }, 5000);
+        }
         console.log(Tablero.arrayTablero);
     }
 
